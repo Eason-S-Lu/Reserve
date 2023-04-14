@@ -1,3 +1,12 @@
+/*This is a Rust program that uses the Serenity and Lettre crates to implement a Discord bot that performs user verification via email. The bot listens for a specific command ([verify]) in a designated verification channel. When a user issues the command, the bot sends a DM to the user requesting their email address. The user responds with their email address, and the bot sends an email containing a verification code. The bot then sends another DM to the user requesting the verification code. The user responds with the verification code, and if it matches the one sent via email, the bot assigns a "verified" role to the user.
+
+The program defines a Handler struct that implements the EventHandler trait from Serenity. The message method of the Handler struct is responsible for handling user commands and implementing the verification process. The ready method of the Handler struct is called when the bot connects to Discord and simply prints a message to the console indicating that the bot is connected.
+
+The program also defines a generate_verification_code function that generates a random alphanumeric string of length 6 to use as the verification code. The send_verification_email function uses the Lettre crate to send an email containing the verification code to the user's email address.
+
+The program uses the env crate to read the Discord bot token from the environment variable BOT_TOKEN. It also defines two constants: verify_channel_id and verify_role_name. The former is the ID of the verification channel, and the latter is the name of the role that will be assigned to verified users.
+
+The program uses the tokio crate to run the main event loop of the Discord bot asynchronously.*/
 use std::env;
 
 use rand::{Rng, distributions::Alphanumeric};
